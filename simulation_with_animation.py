@@ -53,6 +53,7 @@ for i in range(number_of_bots):
         return points,
     ani = animation.FuncAnimation(fig, update, 100,interval=20, blit=True)
 
+plt.grid()
 plt.show()
 
 
