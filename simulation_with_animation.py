@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-import time
 
 number_of_bots= (int)(input("Enter a number: "))
 x = np.random.normal(0, 50, number_of_bots)
@@ -53,7 +52,7 @@ for i in range(number_of_bots):
                 y[i] = y[i] + (y_intersection[i]-y[i]) / 100
         points.set_offsets(np.c_[x, y])
         return points,
-    ani = animation.FuncAnimation(fig, update, 100,interval=0.2, blit=True)
+    ani = animation.FuncAnimation(fig, update, 100,interval=20, blit=True)
 
 plt.show()
 
