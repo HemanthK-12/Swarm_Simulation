@@ -16,23 +16,22 @@ m_bestfit,c_bestfit=bestfit()
 def y_bestfit(x):
     return (m_bestfit*x)+c_bestfit
 
-
-x_intersection = (y+(x/m_bestfit)-c_bestfit)/(m_bestfit+(1/m_bestfit))
-y_intersection = y_bestfit(x_intersection)
-
-bestfit_parameters=np.linspace(np.min(x_intersection),np.max(x_intersection),1000)
-m_botpath=[]
-c_botpath=[]
-# Plot the perpendicular lines
-
 fig, ax = plt.subplots()
 ax.scatter(x, y, color='r')
+x_intersection = (y+(x/m_bestfit)-c_bestfit)/(m_bestfit+(1/m_bestfit))
+y_intersection = y_bestfit(x_intersection)
+bestfit_parameters=np.linspace(np.min(x_intersection),np.max(x_intersection),1000)
+ax.plot(bestfit_parameters, y_bestfit(bestfit_parameters), color='r')
+
+#To label the bots on the graph
 for i in range(number_of_bots):
     if(y[i]>y_bestfit(x[i])):
         ax.annotate(i, (x[i], y[i]), textcoords="offset points", xytext=(0,15), ha='center')
     else:
         ax.annotate(i, (x[i], y[i]), textcoords="offset points", xytext=(0,-15), ha='center')
-ax.plot(bestfit_parameters, y_bestfit(bestfit_parameters), color='r')
+
+m_botpath=[]
+c_botpath=[]
 for i in range(number_of_bots):
     m_botpath.append((y[i]-y_intersection[i])/(x[i]-x_intersection[i]))
     c_botpath.append(y[i]-m_botpath[i]*x[i])
@@ -55,5 +54,6 @@ for i in range(number_of_bots):
     ani = animation.FuncAnimation(fig, update, 100,interval=20, blit=True)
 
 plt.show()
+
 
 
